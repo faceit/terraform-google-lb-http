@@ -60,8 +60,13 @@ variable url_map {
 }
 
 variable ssl {
-  description = "Set to `true` to enable SSL support, requires variables `private_key` and `certificate`."
+  description = "Set to `true` to enable SSL support, requires variables `private_key` and `certificate` OR ssl_certificate."
   default     = false
+}
+
+variable ssl_certificate {
+  description = "Url of the alread-uploaded ssl certificate"
+  default     = ""
 }
 
 variable private_key {
