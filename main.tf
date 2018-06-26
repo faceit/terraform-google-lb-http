@@ -51,15 +51,7 @@ resource "google_compute_target_https_proxy" "default" {
   count            = "${var.ssl ? 1 : 0}"
   name             = "${var.name}-https-proxy"
   url_map          = "${element(compact(concat(list(var.url_map), google_compute_url_map.default.*.self_link)), 0)}"
-  ssl_certificates = ["${length(var.ssl_certificate) > 0 ? var.ssl_certificate : google_compute_ssl_certificate.default.self_link}"]
-}
-
-resource "google_compute_ssl_certificate" "default" {
-  project     = "${var.project}"
-  count       = "${var.ssl && length(var.ssl_certificate) = 0 ? 1 : 0}"
-  name        = "${var.name}-certificate"
-  private_key = "${var.private_key}"
-  certificate = "${var.certificate}"
+  ssl_certificates = ["${var.ssl_certificate}"]
 }
 
 resource "google_compute_url_map" "default" {
