@@ -68,7 +68,7 @@ resource "google_compute_backend_service" "default" {
   port_name     = "${element(split(",", element(var.backend_params, count.index)), 1)}"
   protocol      = "HTTP"
   timeout_sec   = "${element(split(",", element(var.backend_params, count.index)), 3)}"
-  connection_draining_timeout_sec = "${length(split(",", element(var.backend_params, count.index))) == 4 ? ${element(split(",", element(var.backend_params, count.index)), 4)} : 300}"
+  connection_draining_timeout_sec = "${length(split(",", element(var.backend_params, count.index))) == 4 ? element(split(",", element(var.backend_params, count.index)), 4) : 300}"
   backend       = ["${var.backends["${count.index}"]}"]
   health_checks = ["${element(google_compute_http_health_check.default.*.self_link, count.index)}"]
 }
