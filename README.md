@@ -16,8 +16,8 @@ module "gce-lb-http" {
     ],
   }
   backend_params    = [
-    # health check path, port name, port number, timeout seconds.
-    "/,http,80,10"
+    # health check path, port name, port number, timeout seconds, connection draining timeout seconds, check interval seconds.
+    "/,http,80,30,300,5"
   ]
 }
 ```
